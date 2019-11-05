@@ -1,0 +1,23 @@
+PODS:
+  - JKCoreTextKit (0.1.0)
+  - Kiwi (3.0.0)
+
+DEPENDENCIES:
+  - JKCoreTextKit (from `../`)
+  - Kiwi
+
+SPEC REPOS:
+  trunk:
+    - Kiwi
+
+EXTERNAL SOURCES:
+  JKCoreTextKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JKCoreTextKit: efb32829b17460df25f7a364337d7bf6572d7083
+  Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
+
+PODFILE CHECKSUM: c83edf0582ecd4ab9da942d90b36cd0dc217b559
+
+COCOAPODS: 1.8.4

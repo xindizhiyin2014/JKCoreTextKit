@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JKCoreTextKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JKCoreTextKit.'
+  s.summary          = 'this is a tool of coretext,it help developer to easily use coretext when text and img.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,13 +18,13 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+this is a tool of coretext,it help developer to easily use coretext when text and img,it will update with the need.
                        DESC
 
   s.homepage         = 'https://github.com/xindizhiyin2014/JKCoreTextKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'xindizhiyin2014' => 'hlhan@vova.com.hk' }
+  s.author           = { 'xindizhiyin2014' => '929097264@qq.com' }
   s.source           = { :git => 'https://github.com/xindizhiyin2014/JKCoreTextKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

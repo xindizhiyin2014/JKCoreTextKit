@@ -1,0 +1,6 @@
+framework module JKCoreTextKit {
+  umbrella header "JKCoreTextKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
