@@ -9,12 +9,30 @@
 #import "CTFrameParserConfig.h"
 
 @implementation CTFrameParserConfig
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.fontName = [UIFont systemFontOfSize:12].fontName;
+        self.font = [UIFont systemFontOfSize:14];
+        _fontName = [UIFont systemFontOfSize:14].fontName;
+        _fontSize = 14;
+        self.textColor = [UIColor blackColor];
     }
     return self;
 }
+
+- (void)setFontName:(NSString *)fontName
+{
+    _fontName = fontName;
+    self.font = [UIFont fontWithName:fontName size:self.fontSize];
+}
+
+- (void)setFontSize:(CGFloat)fontSize
+{
+    _fontSize = fontSize;
+   self.font = [self.font fontWithSize:fontSize];
+}
+
+
 @end

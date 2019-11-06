@@ -120,20 +120,44 @@
     if (dict[@"alpha"]) {
         alpha = [dict[@"alpha"] floatValue];
     }
-    UIColor *color = [self jkColorWithHexString:dict[@"color"] alpha:alpha];
+    NSString *colorHexStr = dict[@"color"];
+    UIColor *color = nil;
+    if ((colorHexStr && ([colorHexStr hasPrefix:@"0x"] && colorHexStr.length == 8)) || ([colorHexStr hasPrefix:@"#"] && colorHexStr.length == 7)) {
+        color = [self jkColorWithHexString:colorHexStr alpha:alpha];
+    } else {
+       color = config.textColor;
+    }
     if (color) {
         attributes[(id)kCTForegroundColorAttributeName] = (id)color.CGColor;
+    }
+    
+    CGFloat bgAlpha = 1;
+    if (dict[@"bgAlpha"]) {
+        bgAlpha = [dict[@"bgAlpha"] floatValue];
+    }
+    if (@available(iOS 10.0, *)) {
+        NSString *bgColorHexStr = dict[@"bgColor"];
+        UIColor *bgColor = nil;
+        if ((bgColorHexStr && ([bgColorHexStr hasPrefix:@"0x"] && bgColorHexStr.length == 8)) || ([bgColorHexStr hasPrefix:@"#"] && bgColorHexStr.length == 7)) {
+            bgColor = [self jkColorWithHexString:bgColorHexStr alpha:bgAlpha];
+        } else {
+           bgColor = config.bgColor;
+        }
+        if (bgColor) {
+          attributes[(id)kCTBackgroundColorAttributeName] = (id)bgColor.CGColor;
+        }
     } else {
-        color = config.textColor;
+        // Fallback on earlier versions
     }
     
     CGFloat fontSize = [dict[@"size"] floatValue];
     if (fontSize > 0) {
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)config.fontName, fontSize, NULL);
+        UIFont *font = [UIFont systemFontOfSize:fontSize];
+        CTFontRef fontRef = (__bridge CTFontRef)font;
         attributes[(id)kCTFontAttributeName] = (__bridge id)(fontRef);
         CFRelease(fontRef);
     } else {
-      CTFontRef fontRef = CTFontCreateWithName((CFStringRef)config.fontName, config.fontSize, NULL);
+        CTFontRef fontRef = (__bridge CTFontRef)config.font;
         attributes[(id)kCTFontAttributeName] = (__bridge id)(fontRef);
         CFRelease(fontRef);
     }
@@ -221,6 +245,5 @@ static CGFloat widthCallback(void *ref) {
     [[NSScanner scannerWithString:bString] scanHexInt:&b];
     return [UIColor colorWithRed:((float)r / 255.0f) green:((float)g / 255.0f) blue:((float)b / 255.0f) alpha:alpha];
 }
-
 
 @end
