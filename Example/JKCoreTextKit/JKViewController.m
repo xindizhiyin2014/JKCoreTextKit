@@ -29,6 +29,7 @@
         ctView.data = data;
         ctView.frame = CGRectMake(0, 200, 300, data.height);
         [self.view addSubview:ctView];
+    
     }
 
 

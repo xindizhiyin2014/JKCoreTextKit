@@ -75,9 +75,12 @@
     dict[(id)kCTForegroundColorAttributeName] = (id)textColor.CGColor;
     dict[(id)kCTFontAttributeName] = (__bridge id)fontRef;
     dict[(id)kCTParagraphStyleAttributeName] = (__bridge id)theParagraphRef;
-    
-    CFRelease(theParagraphRef);
-    CFRelease(fontRef);
+    if (theParagraphRef != NULL) {
+        CFRelease(theParagraphRef);
+    }
+    if (fontRef != NULL) {
+        CFRelease(fontRef);
+    }
     
     return dict;
 }
@@ -97,10 +100,13 @@
     CoreTextData *data = [[CoreTextData alloc] init];
     data.ctFrame = frame;
     data.height = textHeight;
+    if (frame != NULL) {
+        CFRelease(frame);
+    }
     
-    // 内存释放
-    CFRelease(frame);
-    CFRelease(framesetter);
+    if (framesetter != NULL) {
+        CFRelease(framesetter);
+    }
     
     return data;
 }
@@ -110,7 +116,9 @@
     CGPathAddRect(path, NULL, CGRectMake(0, 0, config.width, height));
     
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-    CFRelease(path);
+    if (path != NULL) {
+        CFRelease(path);
+    }
     return frame;
 }
 
@@ -155,11 +163,15 @@
         UIFont *font = [UIFont systemFontOfSize:fontSize];
         CTFontRef fontRef = (__bridge CTFontRef)font;
         attributes[(id)kCTFontAttributeName] = (__bridge id)(fontRef);
-        CFRelease(fontRef);
+        if (fontRef != NULL) {
+            CFRelease(fontRef);
+        }
     } else {
         CTFontRef fontRef = (__bridge CTFontRef)config.font;
         attributes[(id)kCTFontAttributeName] = (__bridge id)(fontRef);
-        CFRelease(fontRef);
+        if (fontRef != NULL) {
+            CFRelease(fontRef);
+        }
     }
     
     NSString *content = dict[@"content"];
@@ -194,8 +206,9 @@ static CGFloat widthCallback(void *ref) {
     NSDictionary *attributes = [self attributesWithConfig:config];
     NSMutableAttributedString *space = [[NSMutableAttributedString alloc] initWithString:content attributes:attributes];
     CFAttributedStringSetAttribute((CFMutableAttributedStringRef)space, CFRangeMake(0, 1), kCTRunDelegateAttributeName, delegate);
-    CFRelease(delegate);
-    
+    if (delegate != NULL) {
+        CFRelease(delegate);
+    }
     return space;
 }
 

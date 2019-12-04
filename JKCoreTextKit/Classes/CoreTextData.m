@@ -11,11 +11,12 @@
 @implementation CoreTextData
 - (void)setCtFrame:(CTFrameRef)ctFrame {
     if (_ctFrame != ctFrame) {
-        if(_ctFrame != nil) {
+        if(_ctFrame != NULL) {
             CFRelease(_ctFrame);
         }
-        
-        CFRetain(ctFrame);
+        if (ctFrame != NULL) {
+            CFRetain(ctFrame);
+        }
         _ctFrame = ctFrame;
     }
 }
@@ -75,9 +76,9 @@
 }
  
 - (void)dealloc {
-    if (_ctFrame != nil) {
+    if (_ctFrame != NULL) {
         CFRelease(_ctFrame);
-        _ctFrame = nil;
+        _ctFrame = NULL;
     }
 }
 

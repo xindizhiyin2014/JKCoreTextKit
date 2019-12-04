@@ -34,5 +34,12 @@
    self.font = [self.font fontWithSize:fontSize];
 }
 
+- (void)setFont:(UIFont *)font
+{
+    _font = font;
+    _fontName = font.fontName;
+    _fontSize = font.pointSize;
+}
+
 
 @end
